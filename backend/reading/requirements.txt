@@ -1,0 +1,14 @@
+sqlalchemy
+python-dotenv
+pydantic
+sqlalchemy
+psycopg2-binary
+fastapi
+httpx
+uvicorn
+python-jose==3.3.0
+ujson==5.10.0
+passlib==1.7.4
+bcrypt==3.2.0
+pydantic[email]
+python-multipart

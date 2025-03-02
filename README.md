@@ -35,7 +35,23 @@
 
 * Тестування оновлення полів зазначенної книжки через POSTMAN
 ![test_update_book_image](backend/book/media_readme/test_update_book.png)
-  
+
+
+## Reading service
+* `POST /reading-progress` — створення запису про прогрес читання
+* `GET /reading-progress/:userId` — отримання списку книг, які читає користувач
+* `PUT /reading-progress/:id` — оновлення прогресу читання
+
+### Testing
+* Тестування створення нового запису читання через POSTMAN
+![test_create_reading_progress_image](backend/reading/media_readme/test_create_reading_progress.png)
+
+* Тестування отримання прогресу читання юзера POSTMAN
+![test_get_reading_user_progress_image](backend/reading/media_readme/test_get_reading_user_progress.png)
+
+* Тестування оновлення читання через POSTMAN
+![test_update_reading_progress_image](backend/reading/media_readme/test_update_reading_progress.png)
+
 # Frontend
 ## Instruction to UP
 1. npm install
