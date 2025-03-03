@@ -6,6 +6,10 @@
 # Backend
 ## Instruction to UP
 
+## API Gateway
+По цьму урлу можна ознайомитись з документацією всіх ендпоїнтів системи - `http://localhost:8080/api/docs/`
+![](backend/gateway/media_readme/gateway_swagger.png)
+
 ## User service
 * `POST /users/register` — реєстрація нового користувача
 * `POST /users/login` — авторизація користувача

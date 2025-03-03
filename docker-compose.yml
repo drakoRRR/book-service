@@ -1,0 +1,121 @@
+services:
+  api-gateway:
+    build:
+      context: ./backend/gateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/src
+    platform: linux/amd64
+    depends_on:
+      - user-service
+      - book-service
+      - reading-service
+    command: >
+      sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload"
+
+  user-service:
+    container_name: user-service-api
+    build:
+      context: ./backend/user
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/src
+    platform: linux/amd64
+    env_file: ./backend/user/.env
+    command: >
+      sh -c "uvicorn app.main:fastapi_app --host 0.0.0.0 --port 5000 --reload"
+    depends_on:
+      user-service-db:
+        condition: service_healthy
+
+  user-service-db:
+    container_name: "user-service-db"
+    image: postgres:16
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    volumes:
+      - user-service-db:/var/lib/postgresql/data
+    env_file: ./backend/user/.env
+    ports:
+      - "5433:5432"
+    platform: linux/amd64
+
+  book-service:
+    container_name: book-service-api
+    build:
+      context: ./backend/book
+      dockerfile: Dockerfile
+    ports:
+      - "6000:6000"
+    volumes:
+      - .:/src
+    platform: linux/amd64
+    env_file: ./backend/book/.env
+    command: >
+      sh -c "uvicorn app.main:fastapi_app --host 0.0.0.0 --port 6000 --reload"
+    depends_on:
+      book-service-db:
+        condition: service_healthy
+
+  book-service-db:
+    container_name: "book-service-db"
+    image: postgres:16
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    volumes:
+      - book-service-db:/var/lib/postgresql/data
+    env_file: ./backend/book/.env
+    ports:
+      - "5434:5432"
+    platform: linux/amd64
+
+  reading-service:
+    container_name: reading-api-service
+    build:
+      context: ./backend/reading
+      dockerfile: Dockerfile
+    ports:
+      - "7000:7000"
+    volumes:
+      - .:/src
+    platform: linux/amd64
+    env_file: ./backend/reading/.env
+    command: >
+      sh -c "uvicorn app.main:fastapi_app --host 0.0.0.0 --port 7000 --reload"
+    depends_on:
+      reading-service-db:
+        condition: service_healthy
+
+  reading-service-db:
+    container_name: "reading-service-db"
+    image: postgres:16
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    volumes:
+      - reading-service-db:/var/lib/postgresql/data
+    env_file: ./backend/reading/.env
+    ports:
+      - "5435:5432"
+    platform: linux/amd64
+
+volumes:
+  reading-service-db:
+  user-service-db:
+  book-service-db:
