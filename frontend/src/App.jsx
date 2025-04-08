@@ -6,19 +6,18 @@ import Books from './pages/Books'
 function App() {
   return (
     <Router>
-      <nav style={{ padding: '1rem', background: '#f0f0f0' }}>
-        <Link to="/" style={{ marginRight: '1rem' }}>📚 Books</Link>
-        <Link to="/login" style={{ marginRight: '1rem' }}>🔐 Login</Link>
-        <Link to="/register">📝 Register</Link>
+      <nav className="bg-gray-100 p-4 shadow-md flex justify-center gap-6">
+        <Link className="text-blue-600 hover:underline" to="/">📚 Books</Link>
+        <Link className="text-blue-600 hover:underline" to="/login">🔐 Login</Link>
+        <Link className="text-blue-600 hover:underline" to="/register">📝 Register</Link>
       </nav>
-
-      <div style={{ padding: '2rem' }}>
+      <main className="p-6 max-w-2xl mx-auto">
         <Routes>
           <Route path="/" element={<Books />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
-      </div>
+      </main>
     </Router>
   )
 }

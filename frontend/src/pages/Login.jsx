@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from 'react'
 
 export default function Login() {
@@ -7,29 +6,16 @@ export default function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    console.log('Email:', email)
-    console.log('Password:', password)
-
-    // TODO: зробити запит до бекенду
+    console.log('Login:', { email, password })
   }
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        /><br /><br />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        /><br /><br />
-        <button type="submit">Log In</button>
+    <div className="bg-white p-6 rounded-xl shadow-md">
+      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <form onSubmit={handleLogin} className="flex flex-col gap-4">
+        <input className="border rounded px-3 py-2" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input className="border rounded px-3 py-2" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Login</button>
       </form>
     </div>
   )
