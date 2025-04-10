@@ -5,6 +5,8 @@
 
 # Backend
 ## Instruction to UP
+1. npm install
+2. npm run dev
 
 ## API Gateway
 По цьму урлу можна ознайомитись з документацією всіх ендпоїнтів системи - `http://localhost:8080/api/docs/`
