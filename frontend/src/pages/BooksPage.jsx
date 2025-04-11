@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import BookDetailModal from '../pages/BookDetailModal';
 
 const BooksPage = () => {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [selectedAuthor, setSelectedAuthor] = useState('');
+  const [selectedBook, setSelectedBook] = useState(null);
 
   const books = [
     {
@@ -12,7 +14,7 @@ const BooksPage = () => {
       genre: "Fantasy",
       description: "This is a description of Book One.",
       publication_year: 2020,
-      file_url: "https://i.pinimg.com/236x/f8/e7/33/f8e73307e246642b3dacc120aa276b1d.jpg",
+      file_url: "https://manybooks.net/sites/default/files/styles/220x330_ebook/public/webform/ebook_feature_application/11401/starbreaker-v2.jpg?itok=m1PHk7ou",
     },
     {
       id: 2,
@@ -34,6 +36,60 @@ const BooksPage = () => {
     },
     {
       id: 4,
+      title: "Book Four",
+      author: "Author Four",
+      genre: "Romance",
+      description: "This is a description of Book Four.",
+      publication_year: 2023,
+      file_url: "https://i.pinimg.com/236x/f8/e7/33/f8e73307e246642b3dacc120aa276b1d.jpg",
+    },
+    {
+      id: 5,
+      title: "Book Four",
+      author: "Author Four",
+      genre: "Romance",
+      description: "This is a description of Book Four.",
+      publication_year: 2023,
+      file_url: "https://i.pinimg.com/236x/f8/e7/33/f8e73307e246642b3dacc120aa276b1d.jpg",
+    },
+    {
+      id: 6,
+      title: "Book Four",
+      author: "Author Four",
+      genre: "Romance",
+      description: "This is a description of Book Four.",
+      publication_year: 2023,
+      file_url: "https://i.pinimg.com/236x/f8/e7/33/f8e73307e246642b3dacc120aa276b1d.jpg",
+    },
+    {
+      id: 7,
+      title: "Book Four",
+      author: "Author Four",
+      genre: "Romance",
+      description: "This is a description of Book Four.",
+      publication_year: 2023,
+      file_url: "https://i.pinimg.com/236x/f8/e7/33/f8e73307e246642b3dacc120aa276b1d.jpg",
+    },
+    {
+      id: 8,
+      title: "Book Four",
+      author: "Author Four",
+      genre: "Romance",
+      description: "This is a description of Book Four.",
+      publication_year: 2023,
+      file_url: "https://i.pinimg.com/236x/f8/e7/33/f8e73307e246642b3dacc120aa276b1d.jpg",
+    },
+    {
+      id: 9,
+      title: "Book Four",
+      author: "Author Four",
+      genre: "Romance",
+      description: "This is a description of Book Four.",
+      publication_year: 2023,
+      file_url: "https://i.pinimg.com/236x/f8/e7/33/f8e73307e246642b3dacc120aa276b1d.jpg",
+    },
+    {
+      id: 10,
       title: "Book Four",
       author: "Author Four",
       genre: "Romance",
@@ -67,7 +123,7 @@ const BooksPage = () => {
           <option value="Romance">Romance</option>
         </select>
       </div>
-      
+
       <div>
         <label htmlFor="author">Filter by Author:</label>
         <select
@@ -85,18 +141,14 @@ const BooksPage = () => {
 
       <div className="book-list">
         {filteredBooks.map((book) => (
-          <div key={book.id} className="book-card">
-            <img src={book.file_url} alt={book.title} className="book-image" />
+          <div key={book.id} className="book-card" onClick={() => setSelectedBook(book)}>
+            <img src={book.file_url} alt={book.title} />
             <h3>{book.title}</h3>
-            <p><strong>Author:</strong> {book.author}</p>
-            <p><strong>Genre:</strong> {book.genre}</p>
-            <p><strong>Description:</strong> {book.description}</p>
-            <p><strong>Year:</strong> {book.publication_year}</p>
-            <button>View Details</button>
-            <button>Start Reading</button>
           </div>
         ))}
       </div>
+
+      <BookDetailModal book={selectedBook} onClose={() => setSelectedBook(null)} />
     </div>
   );
 };

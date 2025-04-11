@@ -1,71 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// Шлях до логотипу
+import logo from '../assets/logo-library.png';
+
 const Header = () => {
   return (
-    <header style={headerStyle}>
-      <div style={brandStyle}>
-        <h1>Online Library</h1>
+    <header className="header">
+      <div className="brand">
+        {/* Логотип, який веде на головну */}
+        <Link to="/">
+          <img src={logo} alt="Online Library Logo" className="logo" />
+        </Link>
       </div>
-      <nav style={navStyle}>
-        <ul style={navListStyle}>
-          <li style={navItemStyle}><Link to="/" style={linkStyle}>Book List</Link></li>
-          <li style={navItemStyle}><Link to="/continue-reading" style={linkStyle}>Continue Reading</Link></li>
+      <nav>
+        <ul>
+          <li><Link to="/" className="link">Book List</Link></li>
+          <li><Link to="/continue-reading" className="link">Continue Reading</Link></li>
         </ul>
       </nav>
-      <div style={loginButtonStyle}>
-        <button style={loginButtonStyleObject}>Login</button>
+      <div className="login-button">
+        <button>Login</button>
       </div>
     </header>
   );
-};
-
-const headerStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '1rem 2rem',
-  backgroundColor: '#007BFF',
-  color: 'white',
-};
-
-const brandStyle = {
-  fontSize: '1.5rem',
-};
-
-const navStyle = {
-  flexGrow: 1,
-};
-
-const navListStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  listStyle: 'none',
-  margin: 0,
-  padding: 0,
-};
-
-const navItemStyle = {
-  margin: '0 1rem',
-};
-
-const linkStyle = {
-  color: 'white',
-  textDecoration: 'none',
-  fontSize: '1.1rem',
-};
-
-const loginButtonStyle = {
-  marginLeft: 'auto',
-};
-
-const loginButtonStyleObject = {
-  padding: '0.5rem 1rem',
-  backgroundColor: 'white',
-  color: '#007BFF',
-  border: '1px solid #007BFF',
-  borderRadius: '5px',
-  cursor: 'pointer',
 };
 
 export default Header;
