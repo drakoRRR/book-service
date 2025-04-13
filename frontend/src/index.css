@@ -221,4 +221,73 @@ select:focus {
   margin-top: 1rem;
 }
 
-/* === Сторінка читання === */
+.auth-container {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 30px;
+  background: #1e3593;
+  border-radius: 12px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.auth-container input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+}
+
+.login-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #ac4c89;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+  background-color: #c56c9d;
+}
+
+.message {
+  margin-top: 10px;
+}
+
+.register-link {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #ac4c89;
+  text-decoration: underline;
+}
+
+.auth-container input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc; 
+  box-sizing: border-box; 
+  outline: none; 
+  font-size: 16px;
+}
+
+.register-link {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #ac4c89;
+  text-decoration: underline;
+}
