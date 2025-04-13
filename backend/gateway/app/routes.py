@@ -5,7 +5,7 @@ import httpx
 from fastapi import APIRouter, Depends
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
-from .schemas import UserResponse, UserCreate, BookResponse, BookUpdate, ReadingProgressResponse, ReadingProgressUpdate
+from .schemas import *
 
 router = APIRouter()
 security = HTTPBasic()
@@ -24,7 +24,7 @@ async def forward_request(method: str, service_url: str, path: str, **kwargs):
 
 @router.post("/users/register", response_model=UserResponse)
 async def register_user(data: UserCreate):
-    return await forward_request("POST", USER_SERVICE_URL, "/users/register", json=data)
+    return await forward_request("POST", USER_SERVICE_URL, "/users/register", json=data.dict())
 
 
 @router.post("/users/login")
@@ -35,8 +35,8 @@ async def login_user(credentials: HTTPBasicCredentials = Depends(security)):
 
 
 @router.post("/books", response_model=BookResponse)
-async def add_book(data: dict):
-    return await forward_request("POST", BOOK_SERVICE_URL, "/books", json=data)
+async def add_book(data: BookCreate):
+    return await forward_request("POST", BOOK_SERVICE_URL, "/books", json=data.dict())
 
 
 @router.get("/books", response_model=List[BookResponse])
@@ -51,12 +51,12 @@ async def book_detail(book_id: str):
 
 @router.put("/books/{book_id}", response_model=BookResponse)
 async def edit_book(book_id: str, data: BookUpdate):
-    return await forward_request("PUT", BOOK_SERVICE_URL, f"/books/{book_id}", json=data)
+    return await forward_request("PUT", BOOK_SERVICE_URL, f"/books/{book_id}", json=data.dict())
 
 
 @router.post("/reading-progress", response_model=ReadingProgressResponse)
-async def add_progress(data: dict):
-    return await forward_request("POST", READING_SERVICE_URL, "/reading-progress", json=data)
+async def add_progress(data: ReadingProgressCreate):
+    return await forward_request("POST", READING_SERVICE_URL, "/reading-progress", json=data.dict())
 
 
 @router.get("/reading-progress/{user_id}", response_model=List[ReadingProgressResponse])
@@ -66,4 +66,4 @@ async def list_user_progress(user_id: str):
 
 @router.put("/reading-progress/{progress_id}", response_model=ReadingProgressResponse)
 async def edit_progress(progress_id: str, data: ReadingProgressUpdate):
-    return await forward_request("PUT", READING_SERVICE_URL, f"/reading-progress/{progress_id}", json=data)
+    return await forward_request("PUT", READING_SERVICE_URL, f"/reading-progress/{progress_id}", json=data.dict())
