@@ -67,3 +67,4 @@ async def list_user_progress(user_id: str):
 @router.put("/reading-progress/{progress_id}", response_model=ReadingProgressResponse)
 async def edit_progress(progress_id: str, data: ReadingProgressUpdate):
     return await forward_request("PUT", READING_SERVICE_URL, f"/reading-progress/{progress_id}", json=data.dict())
+
