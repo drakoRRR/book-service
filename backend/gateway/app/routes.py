@@ -3,9 +3,9 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
-USER_SERVICE_URL = "http://user_service:5000"
-BOOK_SERVICE_URL = "http://book_service:6000"
-READING_SERVICE_URL = "http://reading_service:7000"
+USER_SERVICE_URL = "http://user-service:5000"
+BOOK_SERVICE_URL = "http://book-service:6000"
+READING_SERVICE_URL = "http://reading-service:7000"
 
 
 async def forward_request(method: str, service_url: str, path: str, **kwargs):
