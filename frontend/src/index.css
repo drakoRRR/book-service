@@ -291,3 +291,43 @@ select:focus {
   color: #ac4c89;
   text-decoration: underline;
 }
+
+
+
+.progress-input-container {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.page-input {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-right: 1rem;
+  width: 150px;
+  outline: none;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: border 0.3s ease;
+}
+
+.page-input:focus {
+  border: 2px solid #ac4c89;
+}
+
+.save-progress-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #ac4c89;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.save-progress-button:hover {
+  background-color: #c56c9d;
+}
