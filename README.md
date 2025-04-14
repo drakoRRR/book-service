@@ -5,8 +5,12 @@
 
 # Backend
 ## Instruction to UP
-1. npm install
-2. npm run dev
+1. make up-build
+
+## Fixtures
+Write in console
+* `chmod +x fill_books.sh`
+* `./fill_books.sh`
 
 ## API Gateway
 По цьму урлу можна ознайомитись з документацією всіх ендпоїнтів системи - `http://localhost:8080/api/docs/`
