@@ -1,7 +1,8 @@
 import base64
+from json import JSONDecodeError
 
 import httpx
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status, HTTPException
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 from .schemas import *
@@ -15,10 +16,23 @@ READING_SERVICE_URL = "http://reading-service:7000"
 
 
 async def forward_request(method: str, service_url: str, path: str, **kwargs):
-    url = f"{service_url}{path}"
+    url = f"{service_url.rstrip('/')}/{path.lstrip('/')}"
     async with httpx.AsyncClient() as client:
         response = await client.request(method, url, **kwargs)
+
+    if not response.is_success:
+        raise HTTPException(
+            status_code=response.status_code,
+            detail=f"Error from book service. Status: {response.status_code}, text: {response.text}"
+        )
+
+    try:
         return response.json()
+    except JSONDecodeError:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to decode JSON. Got: {response.text}"
+        )
 
 
 @router.post("/users/register")
@@ -35,12 +49,12 @@ async def login_user(credentials: HTTPBasicCredentials = Depends(security)):
 
 @router.post("/books")
 async def add_book(data: BookCreate):
-    return await forward_request("POST", BOOK_SERVICE_URL, "/books", json=data.dict())
+    return await forward_request("POST", BOOK_SERVICE_URL, "/books/", json=data.dict())
 
 
 @router.get("/books")
 async def list_books():
-    return await forward_request("GET", BOOK_SERVICE_URL, "/books")
+    return await forward_request("GET", BOOK_SERVICE_URL, "/books/")
 
 
 @router.get("/books/{book_id}")
@@ -55,7 +69,7 @@ async def edit_book(book_id: str, data: BookUpdate):
 
 @router.post("/reading-progress")
 async def add_progress(data: ReadingProgressCreate):
-    return await forward_request("POST", READING_SERVICE_URL, "/reading-progress", json=data.dict())
+    return await forward_request("POST", READING_SERVICE_URL, "/reading-progress/", json=data.dict())
 
 
 @router.get("/reading-progress/{user_id}")
