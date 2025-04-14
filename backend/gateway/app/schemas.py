@@ -35,6 +35,8 @@ class BookCreate(BaseModel):
     description: Optional[str] = None
     publication_year: int
     file_url: str
+    image_url: str
+    pages: int
 
 class BookUpdate(BaseModel):
     title: Optional[str] = None

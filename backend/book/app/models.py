@@ -15,3 +15,5 @@ class Book(Base):
     description = Column(Text, nullable=True)
     publication_year = Column(Integer, nullable=False)
     file_url = Column(String, nullable=False)
+    image_url = Column(String, nullable=False)
+    pages: int

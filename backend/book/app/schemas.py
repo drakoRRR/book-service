@@ -9,6 +9,9 @@ class BookCreate(BaseModel):
     description: Optional[str] = None
     publication_year: int
     file_url: str
+    image_url: str
+    pages: int
+
 
 class BookUpdate(BaseModel):
     title: Optional[str] = None
@@ -17,6 +20,7 @@ class BookUpdate(BaseModel):
     description: Optional[str] = None
     publication_year: Optional[int] = None
     file_url: Optional[str] = None
+
 
 class BookResponse(BookCreate):
     id: str
