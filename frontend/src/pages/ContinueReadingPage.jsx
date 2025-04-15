@@ -60,6 +60,9 @@ const ContinueReadingPage = () => {
               <h3>{book.title}</h3>
               <p>{book.author}</p>
               <p><strong>{entry.percentage_read}% read</strong></p>
+              <p>
+                Page <strong>{entry.current_page}</strong> / {book.pages}
+              </p>
             </div>
           );
         })}
