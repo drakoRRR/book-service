@@ -8,7 +8,8 @@ import BookReaderPage from './pages/BookReaderPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
-localStorage.setItem('userId', 'a8411513-977e-48b4-a2b9-0c15aa7f84a0'); // delete when login is ready
+const userId = JSON.parse(localStorage.getItem('user'))?.user_id || null;
+
 
 const App = () => {
   return (

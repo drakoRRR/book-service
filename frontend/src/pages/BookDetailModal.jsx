@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom';
 
 const BookDetailModal = ({ book, onClose }) => {
   const navigate = useNavigate();
-  const userId = localStorage.getItem('userId');
+  const userId = JSON.parse(localStorage.getItem('user'))?.user_id || null;
+
 
   if (!book) return null;
 

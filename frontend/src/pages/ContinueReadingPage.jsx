@@ -5,7 +5,8 @@ const ContinueReadingPage = () => {
   const [readingList, setReadingList] = useState([]);
   const [booksData, setBooksData] = useState([]);
   const navigate = useNavigate();
-  const userId = localStorage.getItem('userId');
+  const userId = JSON.parse(localStorage.getItem('user'))?.user_id || null;
+
 
   useEffect(() => {
     const fetchReadingProgress = async () => {

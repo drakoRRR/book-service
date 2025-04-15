@@ -26,14 +26,28 @@ const Header = () => {
         </ul>
       </nav>
 
-      <div className="login-button">
+      <div className="login-button" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         {user ? (
-          <button className="login-btn" onClick={handleLogout}>
-            Вийти
-          </button>
+          <>
+            <button
+              className="login-btn"
+              onClick={handleLogout}
+              style={{ padding: '0.6rem 1.2rem', fontSize: '1rem' }}
+            >
+              Вийти
+            </button>
+            <span style={{ marginTop: '4px', fontSize: '0.9rem', color: '#fff', opacity: 0.9 }}>
+              {user.email}
+            </span>
+          </>
         ) : (
           <Link to="/login">
-            <button className="login-btn">Login</button>
+            <button
+              className="login-btn"
+              style={{ padding: '0.6rem 1.2rem', fontSize: '1rem' }}
+            >
+              Login
+            </button>
           </Link>
         )}
       </div>

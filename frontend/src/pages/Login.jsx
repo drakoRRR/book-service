@@ -8,46 +8,56 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      setMessage('Будь ласка, введіть email та пароль');
+      return;
+    }
+  
+    const loginUrl = 'http://localhost:8080/users/login';
+  
+    const basicAuth = btoa(`${email}:${password}`); // кодування в base64
+  
     try {
-      // Варіант для тестування з json-server:
-      const response = await fetch(`http://localhost:3001/users?email=${email}&password=${password}`);
-      const data = await response.json();
-
-      if (data.length > 0) {
-        setMessage('Успішний вхід!');
-        localStorage.setItem('user', JSON.stringify(data[0]));  // Запис у localStorage
-        navigate('/');
-      }
-       else {
-        setMessage('Невірний email або пароль');
-      }
-
-      // Варіант для справжнього бекенду:
-      /*
-      const response = await fetch('http://localhost:3001/users/login', {
+      const response = await fetch(loginUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        headers: {
+          'Authorization': `Basic ${basicAuth}`,
+        },
       });
-
-      if (response.ok) {
+  
+      const data = await response.json();
+      console.log('Дані від бекенду:', data);
+  
+      if (response.ok && data.email) {
+        localStorage.setItem('user', JSON.stringify(data));
         setMessage('Успішний вхід!');
         navigate('/');
       } else {
-        setMessage('Помилка входу');
+        setMessage('Невірний email або пароль');
       }
-      */
-    } catch {
+    } catch (error) {
+      console.error('Помилка підключення до сервера:', error);
       setMessage('Помилка підключення до сервера');
     }
   };
+  
 
   return (
     <div className="auth-container">
       <h2>Вхід</h2>
 
-      <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input placeholder="Пароль" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <input
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+
+      <input
+        placeholder="Пароль"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
       <button className="login-btn" onClick={handleLogin}>Увійти</button>
 
